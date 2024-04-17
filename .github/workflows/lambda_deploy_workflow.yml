@@ -17,7 +17,7 @@ jobs:
           aws-region: ap-south-1
       - name: Zip Lambda code
         run: |
-          zip -r hello.zip hello.py
+          zip -r hello.zip . -i hello.py
       - name: Upload Lambda code to S3
         run: aws s3 cp ./hello.zip s3://my-lambda-product-bucket/hello.zip      # Use AWS CLI or SDK to upload Lambda code to S3 bucket
       # - name: Call Service Catalog to deploy Lambda
