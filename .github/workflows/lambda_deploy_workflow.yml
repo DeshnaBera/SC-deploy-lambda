@@ -28,7 +28,8 @@ jobs:
           aws servicecatalog create-provisioned-product-plan \
             --product-id $PRODUCT_ID \
             --plan-name "LambdaDeployment" \
+            --plan-type "CLOUDFORMATION"
             --provisioning-artifact-id $PROVISIONING_ARTIFACT_ID \
             --provisioned-product-name "LambdaDeployment" \
             --provisioning-parameters "$PARAMETER_OVERRIDES" \
-            --region your-region
+            --region ap-south-1
