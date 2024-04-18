@@ -20,10 +20,10 @@ jobs:
           zip -r hello.zip . -i hello.py
       - name: Upload Lambda code to S3
         run: aws s3 cp ./hello.zip s3://my-lambda-product-bucket/hello.zip      # Use AWS CLI or SDK to upload Lambda code to S3 bucket
-      # - name: Call Service Catalog to deploy Lambda
-      #   run: |
-      #     aws servicecatalog create-provisioned-product \
-      #       --product-id your-product-id \
-      #       --provisioning-artifact-id your-provisioning-artifact-id \
-      #       --provisioning-parameters "ParameterKey=LambdaS3Bucket,ParameterValue=your-s3-bucket" \
-      #       "ParameterKey=LambdaS3Key,ParameterValue=lambda_function.zip"
+      - name: Call Service Catalog to deploy Lambda
+        run: |
+          aws servicecatalog create-provisioned-product \
+            --product-id prod-zzvrxsnmem6ac \
+            --provisioning-artifact-id pa-lbfqtugwyj4j4 \
+            --provisioning-parameters "ParameterKey=LambdaS3Bucket,ParameterValue=my-lambda-product-bucket" \
+            "ParameterKey=LambdaS3Key,ParameterValue=hello.zip"
