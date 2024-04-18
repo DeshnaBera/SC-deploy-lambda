@@ -30,6 +30,6 @@ jobs:
             --plan-type "CLOUDFORMATION" \
             --provisioning-artifact-id $PROVISIONING_ARTIFACT_ID \
             --provisioned-product-name "LambdaDeployment" \
-            --provisioning-parameters "ParameterKey=LambdaS3Bucket,ParameterValue=my-lambda-product-bucket,UsePreviousValue=false" \
-            "ParameterKey=LambdaS3Key,ParameterValue=hello.zip,UsePreviousValue=false" \
+            --provisioning-parameters "Key=LambdaS3Bucket,Value=my-lambda-product-bucket,UsePreviousValue=false" \
+            "Key=LambdaS3Key,Value=hello.zip,UsePreviousValue=false" \
             --region ap-south-1
