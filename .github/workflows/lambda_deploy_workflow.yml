@@ -22,11 +22,16 @@ jobs:
         run: aws s3 cp ./hello.zip s3://my-lambda-product-bucket/hello.zip  
       - name: Call Service Catalog to deploy Lambda
         run: |
-          PRODUCT_ID="prod-76kjj76mksur6"
-          PROVISIONING_ARTIFACT_ID="pa-tnnkdka6sb7lo"
-          aws servicecatalog create-provisioned-product-plan \
-            --product-id $PRODUCT_ID \
-            --plan-name "LambdaDeployment" \
-            --plan-type "CLOUDFORMATION" \
-            --provisioning-artifact-id $PROVISIONING_ARTIFACT_ID \
-            --provisioned-product-name "LambdaDeployment"
+          aws servicecatalog provision-product \
+          --product-id prod-76kjj76mksur6 \
+          --provisioning-artifact-id pa-tnnkdka6sb7lo \
+          --provisioned-product-name "LambdaDeployment"
+
+        # PRODUCT_ID="prod-76kjj76mksur6"
+          # PROVISIONING_ARTIFACT_ID="pa-tnnkdka6sb7lo"
+          # aws servicecatalog create-provisioned-product-plan \
+          #   --product-id $PRODUCT_ID \
+          #   --plan-name "LambdaDeployment" \
+          #   --plan-type "CLOUDFORMATION" \
+          #   --provisioning-artifact-id $PROVISIONING_ARTIFACT_ID \
+          #   --provisioned-product-name "LambdaDeployment"
