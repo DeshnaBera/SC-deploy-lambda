@@ -22,8 +22,13 @@ jobs:
         run: aws s3 cp ./hello.zip s3://my-lambda-product-bucket/hello.zip      # Use AWS CLI or SDK to upload Lambda code to S3 bucket
       - name: Call Service Catalog to deploy Lambda
         run: |
-          aws servicecatalog create-provisioned-product \
-            --product-id prod-zzvrxsnmem6ac \
-            --provisioning-artifact-id pa-lbfqtugwyj4j4 \
-            --provisioning-parameters "ParameterKey=LambdaS3Bucket,ParameterValue=my-lambda-product-bucket" \
-            "ParameterKey=LambdaS3Key,ParameterValue=hello.zip"
+          PRODUCT_ID="prod-zzvrxsnmem6ac"
+          PROVISIONING_ARTIFACT_ID="pa-lbfqtugwyj4j4"
+          PARAMETER_OVERRIDES="{\"LambdaCodeS3Bucket\": \"my-lambda-product-bucket\", \"LambdaCodeS3Key\": \"hello.zip\"}"
+          aws servicecatalog create-provisioned-product-plan \
+            --product-id $PRODUCT_ID \
+            --plan-name "LambdaDeployment" \
+            --provisioning-artifact-id $PROVISIONING_ARTIFACT_ID \
+            --provisioned-product-name "LambdaDeployment" \
+            --provisioning-parameters "$PARAMETER_OVERRIDES" \
+            --region your-region
