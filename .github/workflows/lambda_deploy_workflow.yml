@@ -24,12 +24,12 @@ jobs:
         run: |
           PRODUCT_ID="prod-zzvrxsnmem6ac"
           PROVISIONING_ARTIFACT_ID="pa-lbfqtugwyj4j4"
-          PARAMETER_OVERRIDES="{\"LambdaCodeS3Bucket\": \"my-lambda-product-bucket\", \"LambdaCodeS3Key\": \"hello.zip\"}"
           aws servicecatalog create-provisioned-product-plan \
             --product-id $PRODUCT_ID \
             --plan-name "LambdaDeployment" \
             --plan-type "CLOUDFORMATION" \
             --provisioning-artifact-id $PROVISIONING_ARTIFACT_ID \
             --provisioned-product-name "LambdaDeployment" \
-            --provisioning-parameters "$PARAMETER_OVERRIDES" \
+            --provisioning-parameters "ParameterKey=LambdaS3Bucket,ParameterValue=my-lambda-product-bucket" \
+            "ParameterKey=LambdaS3Key,ParameterValue=hello.zip" \
             --region ap-south-1
