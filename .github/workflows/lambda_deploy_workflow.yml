@@ -14,24 +14,15 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-west-2
+          aws-region: eu-north-1 
       - name: Zip Lambda code
         run: |
-          zip -r hello.zip . -i hello.py
+          zip -r sum_lambda.zip . -i sum_lambda.py
       - name: Upload Lambda code to S3
-        run: aws s3 cp ./hello.zip s3://my-lambda-product-bucket/hello.zip  
+        run: aws s3 cp ./sum_lambda.zip s3://sc-lambda-product/sum_lambda.zip  
       - name: Call Service Catalog to deploy Lambda
         run: |
           aws servicecatalog provision-product \
-          --product-id prod-h7oqydmiqudg4 \
-          --provisioning-artifact-id pa-zxtrgu7lqjhju \
+          --product-id prod-vhxh5q35kvy3s \
+          --provisioning-artifact-id pa-mcpgxpvdsig3q \
           --provisioned-product-name "LambdaDeployment"
-
-        # PRODUCT_ID="prod-76kjj76mksur6"
-          # PROVISIONING_ARTIFACT_ID="pa-tnnkdka6sb7lo"
-          # aws servicecatalog create-provisioned-product-plan \
-          #   --product-id $PRODUCT_ID \
-          #   --plan-name "LambdaDeployment" \
-          #   --plan-type "CLOUDFORMATION" \
-          #   --provisioning-artifact-id $PROVISIONING_ARTIFACT_ID \
-          #   --provisioned-product-name "LambdaDeployment"
