@@ -23,8 +23,8 @@ jobs:
       - name: Call Service Catalog to deploy Lambda
         run: |
           aws servicecatalog provision-product \
-          --product-id prod-76kjj76mksur6 \
-          --provisioning-artifact-id pa-tnnkdka6sb7lo \
+          --product-id prod-s6zgue4eexq6y \
+          --provisioning-artifact-id pa-gvgnimlcgympu \
           --provisioned-product-name "LambdaDeployment"
 
         # PRODUCT_ID="prod-76kjj76mksur6"
